@@ -22,7 +22,11 @@ open terminal and change directory to your desired folder, then:
 ```
 $ git clone https://github.com/DeVoresyah/RN-Crud YourAppName
 $ cd YourAppName
-$ npm install
+$ yarn
+$ add this paths:
+$ export ANDROID_HOME=/Users/{Account}/Library/Android/sdk
+$ export PATH=$ANDROID_HOME/platform-tools:$PATH
+$ export PATH=$ANDROID_HOME/tools:$PATH
 ```
 
 ## Running Your App
