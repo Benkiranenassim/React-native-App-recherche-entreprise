@@ -45,7 +45,7 @@ export default class FormAdd extends Component {
 		} else if (this.validatePhone(this.state.phone) == false) {
 			alert('Please enter a valid phone number!')
 		} else {
-			axios.post('http://192.168.0.27:3000/contact/add', vm.state)
+			axios.post('http://localhost:3000/api/v1/contacts/add', vm.state)
 			.then(function(response) {
 				const data = response.data;
 

@@ -27,7 +27,7 @@ export default class ContentSection extends Component {
 			loading:true
 		});
 
-		axios.get('http://192.168.0.27:3000/contact')
+		axios.get('http://localhost:3000/api/v1/contacts')
 		.then(function(result) {
 			vm.setState({
 				page: 2,
@@ -44,7 +44,7 @@ export default class ContentSection extends Component {
 	deleteContact = (id) => {
 		var vm = this;
 
-		axios.delete('http://192.168.0.27:3000/contact/delete/'+id)
+		axios.delete('http://localhost:3000/api/v1/contacts/delete/'+id)
 		.then(function(response) {
 			const data = response.data;
 
@@ -140,6 +140,7 @@ export default class ContentSection extends Component {
 									activeOpacity={0.5}>
 										<Body>
 											<Text>{item.name}</Text>
+											<Text>{item.email}</Text>
 											<Text note numberOfLines={1}>{item.phone}</Text>
 										</Body>
 									</TouchableOpacity>

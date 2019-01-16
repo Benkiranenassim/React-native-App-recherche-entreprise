@@ -47,7 +47,7 @@ export default class FormUpdate extends Component {
 		} else if (this.validatePhone(this.state.phone) == false) {
 			alert('Please enter a valid phone number!')
 		} else {
-			axios.put('http://192.168.0.27:3000/contact/update', vm.state)
+			axios.put('http://localhost:3000/api/v1/contacts/edit', vm.state)
 			.then(function(response) {
 				const data = response.data;
 

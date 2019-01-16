@@ -20,7 +20,7 @@ This is	Simple CRUD App including React Navigation, Nativebase and Axios. You ca
 ## Installation
 open terminal and change directory to your desired folder, then:
 ```
-$ git clone https://github.com/DeVoresyah/RN-Crud YourAppName
+$ git clone ...
 $ cd YourAppName
 $ yarn
 $ add this paths:
@@ -44,22 +44,3 @@ You need change some code in these files:
 /src/Contact/components/FormAdd.js
 /src/Contact/components/FormUpdate.js
 ```
-
-## Find me
-You can find me on social media xD
-- [Facebook][facebook]
-- [Instagram][instagram]
-- [Linkedin][linkedin]
-
-and also [Fiverr][fiverr]
-
-## License
-The code is available at [GitHub][home] under the [MIT license][license].
-
-[home]: https://github.com/DeVoresyah/RN-Crud
-[license-image]: https://img.shields.io/badge/license-MIT-blue.svg
-[license]: http://revolunet.mit-license.org
-[facebook]: https://facebook.com/DeVoresyah
-[instagram]: https://instagram.com/devoresyah
-[linkedin]: https://linkedin.com/in/devoresyah
-[fiverr]: https://www.fiverr.com/devoresyah
