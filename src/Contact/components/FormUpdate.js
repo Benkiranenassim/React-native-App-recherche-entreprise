@@ -4,6 +4,7 @@ import { Content, Form, Item, Input, Label, Button, Icon, Text } from 'native-ba
 import axios from 'axios';
 import { StackActions, NavigationActions } from 'react-navigation';
 
+const SERVER_ORIGIN = 'http://58e91448.ngrok.io';
 export default class FormUpdate extends Component {
 	constructor(props) {
 		super(props);
@@ -47,7 +48,7 @@ export default class FormUpdate extends Component {
 		} else if (this.validatePhone(this.state.phone) == false) {
 			alert('Please enter a valid phone number!')
 		} else {
-			axios.put('http://localhost:3000/api/v1/contacts/edit', vm.state)
+			axios.put(`${SERVER_ORIGIN}/api/v1/contacts/edit`, vm.state)
 			.then(function(response) {
 				const data = response.data;
 

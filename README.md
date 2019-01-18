@@ -20,7 +20,7 @@ This is	Simple CRUD App including React Navigation, Nativebase and Axios. You ca
 ## Installation
 open terminal and change directory to your desired folder, then:
 ```
-$ git clone ...
+$ git clone https://github.com/naoufalelh/React-Native-App-Contact-Entreprises.git
 $ cd YourAppName
 $ yarn
 $ add this paths:
@@ -35,12 +35,4 @@ Make sure you server and mysql already running, then run the app
 $ react-native run-android
 or
 $ react-native run-ios
-```
-
-## Code You Need to Change
-You need change some code in these files:
-```
-/src/Contact/components/ContentSection.js
-/src/Contact/components/FormAdd.js
-/src/Contact/components/FormUpdate.js
 ```

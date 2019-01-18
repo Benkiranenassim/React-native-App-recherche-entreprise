@@ -4,6 +4,11 @@ import { Content, List, ListItem, Button, Icon, Body, Text } from 'native-base';
 import axios from 'axios';
 import { StackActions, NavigationActions } from 'react-navigation';
 
+// Change this to your address from the backend project.
+// You can use NGROK to open your backend address and port.
+const SERVER_ORIGIN = 'http://58e91448.ngrok.io';
+
+
 export default class ContentSection extends Component {
 	constructor(props) {
 	  super(props);
@@ -27,26 +32,26 @@ export default class ContentSection extends Component {
 			loading:true
 		});
 
-		axios.get('http://localhost:3000/api/v1/contacts')
-		.then(function(result) {
+		axios.get(`${SERVER_ORIGIN}/api/v1/contacts`)
+		.then(function(response) {
 			vm.setState({
 				page: 2,
 				loading: false,
 				refreshing: false,
-				contactList: result.data
+				contactList: response,
 			});
 		})
 		.catch(function(err) {
-			alert(err)
+			alert(err);
 		});
 	};
 
 	deleteContact = (id) => {
 		var vm = this;
 
-		axios.delete('http://localhost:3000/api/v1/contacts/delete/'+id)
+		axios.delete(`${SERVER_ORIGIN}/api/v1/contacts/delete/${id}`)
 		.then(function(response) {
-			const data = response.data;
+			const data = response;
 
 			alert(data.msg);
 			vm.getData();
