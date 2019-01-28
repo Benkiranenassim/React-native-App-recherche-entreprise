@@ -4,7 +4,7 @@ import { Content, Form, Item, Input, Label, Button, Icon, Text } from 'native-ba
 import axios from 'axios';
 import { StackActions, NavigationActions } from 'react-navigation';
 
-const SERVER_ORIGIN = 'http://58e91448.ngrok.io';
+import SERVER_ORIGIN from './config';
 export default class FormAdd extends Component {
 	constructor() {
 		super();
@@ -17,12 +17,11 @@ export default class FormAdd extends Component {
 	}
 
 	validateEmail = (email) => {
-		const regex = /^[a-z._-]+@[a-z.-]+\.[a-z]{2,4}$/;
-
+		const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		if (email == "") {
 			return false
 		} else {
-			return regex.test(email);
+			return regex.test(String(email).toLowerCase());
 		}
 	}
 
@@ -40,17 +39,17 @@ export default class FormAdd extends Component {
 		const vm = this;
 
 		if (this.state.name == "") {
-			alert('Please enter contact name!')
+			alert('Sil vous plaît entrer le nom du contact!')
 		} else if (this.validateEmail(this.state.email) == false) {
-			alert('Please enter a valid email!')
+			alert('Sil vous plaît entrer un email valide!')
 		} else if (this.validatePhone(this.state.phone) == false) {
-			alert('Please enter a valid phone number!')
+			alert('Sil vous plaît entrer un numéro de téléphone valide!')
 		} else {
 			axios.post(`${SERVER_ORIGIN}/api/v1/contacts/add`, vm.state)
 			.then(function(response) {
 				const data = response.data;
 
-				alert(data.msg);
+				alert('Bien enregistrée');
 				vm.props.navigation.dispatch(
 					vm.props.navigation.goBack()
 				)
@@ -66,21 +65,21 @@ export default class FormAdd extends Component {
 			<Content>
 				<Form style={styles.formOuter}>
 					<Item floatingLabel style={styles.formInput}>
-						<Label>Name</Label>
+						<Label>Nom et prénom</Label>
 						<Input
 						onChangeText={(name) => this.setState({name})}
 						value={this.state.name}
 						/>
 					</Item>
 					<Item floatingLabel style={styles.formInput}>
-						<Label>Email</Label>
+						<Label>E-mail</Label>
 						<Input
 						onChangeText={(email) => this.setState({email})}
 						value={this.state.email}
 						/>
 					</Item>
 					<Item floatingLabel style={styles.formInput}>
-						<Label>Phone</Label>
+						<Label>Téléphone</Label>
 						<Input
 						onChangeText={(phone) => this.setState({phone})}
 						value={this.state.phone}
@@ -88,7 +87,7 @@ export default class FormAdd extends Component {
 					</Item>
 					<Button block primary iconLeft style={styles.submitBtn} onPress={this.formSubmit.bind(this)}>
 						<Icon name='add' />
-						<Text>Add</Text>
+						<Text>Ajouter</Text>
 					</Button>
 				</Form>
 			</Content>

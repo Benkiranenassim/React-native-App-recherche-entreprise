@@ -4,9 +4,8 @@ import { Content, List, ListItem, Button, Icon, Body, Text } from 'native-base';
 import axios from 'axios';
 import { StackActions, NavigationActions } from 'react-navigation';
 
-// Change this to your address from the backend project.
-// You can use NGROK to open your backend address and port.
-const SERVER_ORIGIN = 'http://58e91448.ngrok.io';
+
+import SERVER_ORIGIN from './config';
 
 
 export default class ContentSection extends Component {
@@ -38,7 +37,7 @@ export default class ContentSection extends Component {
 				page: 2,
 				loading: false,
 				refreshing: false,
-				contactList: response,
+				contactList: response.data,
 			});
 		})
 		.catch(function(err) {
@@ -65,11 +64,11 @@ export default class ContentSection extends Component {
 		const vm = this;
 
 		Alert.alert(
-			'Delete Confirmation',
-			'Are you sure want to delete "'+name+'" from contact?',
+			'Confirmation de la supprission',
+			'êtes-vous sûr de vouloir supprimer "'+name+'" de votre contact?',
 			[
-				{text: 'Cancel', onPress: () => console.log('Canceled'), style: 'cancel'},
-				{text: 'Delete', onPress: () => this.deleteContact(id)},
+				{text: 'Annuler', onPress: () => console.log('Annulé'), style: 'annuler'},
+				{text: 'Supprimer', onPress: () => this.deleteContact(id)},
 			]
 		)
 	};
