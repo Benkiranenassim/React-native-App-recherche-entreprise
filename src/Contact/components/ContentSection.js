@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Alert, View, StyleSheet, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native';
-import { Content, List, ListItem, Button, Icon, Body, Text } from 'native-base';
+import { Container, Content, Header, Input, List, ListItem, Button, Icon, Body, Text } from 'native-base';
 import axios from 'axios';
 import { StackActions, NavigationActions } from 'react-navigation';
 
@@ -16,7 +16,8 @@ export default class ContentSection extends Component {
 	  	contactList: [],
 	  	page: 2,
 	  	loading: false,
-	  	refreshing: false
+		refreshing: false,
+		search: '',
 	  };
 	}
 
@@ -32,6 +33,27 @@ export default class ContentSection extends Component {
 		});
 
 		axios.get(`${SERVER_ORIGIN}/api/v1/contacts`)
+		.then(function(response) {
+			vm.setState({
+				page: 2,
+				loading: false,
+				refreshing: false,
+				contactList: response.data,
+			});
+		})
+		.catch(function(err) {
+			alert(err);
+		});
+	};
+
+	search = (searchString) => {
+		const vm = this;
+
+		this.setState({
+			loading:true
+		});
+
+		axios.get(`${SERVER_ORIGIN}/api/v1/contacts/${searchString}`)
 		.then(function(response) {
 			vm.setState({
 				page: 2,
@@ -105,7 +127,7 @@ export default class ContentSection extends Component {
 		this.setState({
 			loading: true
 		}, () => {
-			axios.get('http://192.168.0.27:3000/contact/page/'+this.state.page)
+			axios.get(`${SERVER_ORIGIN}/api/v1/contacts/page/${this.state.page}`)
 			.then(function(response) {
 				const newList = vm.state.contactList.concat(response.data);
 				const newPage = vm.state.page + 1;
@@ -126,12 +148,22 @@ export default class ContentSection extends Component {
 			return(
 				<Content style={styles.contentWrapper}>
 					<View style={{justifyContent:'center', alignItems:'center', paddingTop:250}}>
-						<Text style={styles.emptyText}>No Data Available</Text>
+						<Text style={styles.emptyText}>Chargement en cours</Text>
 					</View>
 				</Content>
 			)
 		} else {
 			return (
+				<Container>
+					<Header searchBar rounded>
+						<Item>
+							<Icon name="search" />
+							<Input placeholder="Rechercher" onChangeText={(search) => this.setState({search})} />
+						</Item>
+						<Button transparent onPress={this.search.bind(this)}>
+							<Text>Search</Text>
+						</Button>
+					</Header>
 					<List style={{flex:1}}>
 						<FlatList
 							data={this.state.contactList}
@@ -157,6 +189,7 @@ export default class ContentSection extends Component {
 							onEndReachedThreshold={0.1}
 						/>
 					</List>
+				</Container>
 			)
 		}
 	}
